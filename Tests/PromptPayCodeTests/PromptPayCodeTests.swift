@@ -64,5 +64,5 @@ func crx16TableTest() async throws
 @Test
 func testBillPayment() async throws
 {
-  //BillPayment(billerID: <#T##any TransactionUserID#>, amount: <#T##Double?#>)
+  BillPayment(billerID: .nationalID("12322"), amount: 23.34).encoding
 }
