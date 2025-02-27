@@ -7,15 +7,19 @@
 
 public struct Tag
 {
-  public let id: Tag.ID
+  public let id: String
   public let value: String
   public let subTags: [Tag]?
   
-  public init(id: Tag.ID, value: String, subTags:[Tag]? = nil)
+  public init(code: String, value: String, subTags:[Tag]? = nil)
   {
-    self.id = id
+    self.id = code
     self.value = value
     self.subTags = subTags
+  }
+  public init(id: Tag.ID, value: String, subTags:[Tag]? = nil)
+  {
+    self.init(code: id.code, value: value, subTags: subTags)
   }
 }
 
@@ -28,6 +32,8 @@ public extension Tag
     static let poiStatic = "11"
     static let domesticMechant = "A000000677010112"
     static let crossBorderMerchant = "A000000677012006"
+    static let merchantPresented = "A000000677010111"
+    static let customerPresented = "A000000677010114"
     static let currencyTHB = "764"
   }
   
@@ -92,6 +98,6 @@ public extension Tag
     // encode subtags if there is
     let subTagsEncoding = self.subTags?.map{$0.encoding}
                                        .joined(separator: "") ?? ""
-    return "\(self.id.code)\(len)\(subTagsEncoding)\(self.value)"
+    return "\(self.id)\(len)\(subTagsEncoding)\(self.value)"
   }
 }

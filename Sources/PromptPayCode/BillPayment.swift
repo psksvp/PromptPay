@@ -12,14 +12,14 @@ public struct BillPayment
     case domestic
     case crossborder
   }
-  public let billerID: TransactionUserID
+  public let billerID: String
   public let aid: String
   public let amount: Double?
   public let ref1: String?
   public let ref2: String?
   public let ref3: String?
   
-  public init(billerID: TransactionUserID,
+  public init(billerID: String,  //validation? How?
               amount: Double?,
               merchant: Mechant = .domestic,
               ref1: String? = nil,
@@ -46,7 +46,7 @@ public extension BillPayment
     }
     
     let paymentSeq = [Tag(id: .aid, value: self.aid),
-                      Tag(id: .billerID, value: billerID.value),
+                      Tag(id: .billerID, value: billerID),
                       Tag(id: .ref1, value: self.ref1 ?? "")] + ref2Seq()
       
     let amountSeq =

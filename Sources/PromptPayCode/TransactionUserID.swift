@@ -6,6 +6,63 @@
 //
 import Foundation
 
+//public class TransactionProxy
+//{
+//  public let code: String
+//  public let value: String
+//  
+//  public init(code: String, value: String)
+//  {
+//    self.code = code
+//    self.value = value
+//  }
+//  
+//  public func validate() -> Bool
+//  {
+//    {fatalError("TransactionProxy.code implement me")}
+//  }
+//}
+//
+//public class NationalID: TransactionProxy
+//{
+//  override public func validate() -> Bool
+//  {
+//    true
+//  }
+//}
+//
+//public class TaxID: TransactionProxy
+//{
+//  override public func validate() -> Bool
+//  {
+//    true
+//  }
+//}
+//
+//public class Phone: TransactionProxy
+//{
+//  override public func validate() -> Bool
+//  {
+//    true
+//  }
+//}
+//
+//public class EWallet: TransactionProxy
+//{
+//  override public func validate() -> Bool
+//  {
+//    true
+//  }
+//}
+//
+//public class BankAccount: TransactionProxy
+//{
+//  override public func validate() -> Bool
+//  {
+//    true
+//  }
+//}
+
 public enum TransactionUserID
 {
   case nationalID(String)
@@ -14,6 +71,8 @@ public enum TransactionUserID
   case ewallet(String)
   case bankAccount(String)
 
+  // stupid code
+  // each of this needs a methor for validation.
   var value: String
   {
     switch self
@@ -28,6 +87,23 @@ public enum TransactionUserID
         return n
       case .bankAccount(let n):
         return n
+    }
+  }
+  
+  var code: String
+  {
+    switch self
+    {
+      case .phone(_):
+        return "01"
+      case .nationalID(_):
+        return "02"
+      case .taxID(_):
+        return "02"
+      case .ewallet(_):
+        return "03"
+      case .bankAccount(_):
+        return "04"
     }
   }
 }
