@@ -42,13 +42,30 @@ public extension BillPayment
     let paymentSeq = [Tag(id: .aid, value: self.aid),
                       Tag(id: .billerID, value: billerID.value),
                       Tag(id: .ref1, value: self.ref1 ?? "")] + (ref2 != nil ? [Tag(id: .ref2, value: ref2!)] : [])
-                      
+      
+    let amountSeq =
+    {
+      guard let amt = self.amount else {return Array<Tag>()}
+      return [Tag(id: .transactionAmount, value: "\(amt.round(precision: .hundredths))")]
+    }
+    
+    let ref3Seq =
+    {
+      guard let ref = self.ref3 else {return Array<Tag>()}
+      return [Tag(id: .additionalData, value: Tag(id: .ref3, value: ref).encoding)]
+    }
 
     let payloadSeq = [Tag(id: .payloadFormat, value: Tag.Value.merchantPresentMode),
                       Tag(id: .poiMethod, value: self.amount != nil ? Tag.Value.poiDynamic : Tag.Value.poiStatic),
                       Tag(id: .payment, value: paymentSeq.map{$0.encoding}.joined()),
                       Tag(id: .transactionCurrency, value: Tag.Value.currencyTHB),
-                      Tag(id: .countryCode, value: "TH")]
+                      Tag(id: .countryCode, value: "TH")] + amountSeq() + ref3Seq()
+    
+    let crc =
+    {
+      let crcTagID = "00\(Tag.ID.crc.code)".suffix(2)
+      let checksum = 
+    }
 
     
     return payloadSeq.map{$0.encoding}.joined()

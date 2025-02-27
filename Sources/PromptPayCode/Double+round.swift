@@ -16,16 +16,16 @@ public extension Double
     case hundredths
   }
   
-  func round(precision: RoundingPrecision = .tenths) -> Double
+  func round(precision: RoundingPrecision = .hundredths) -> Double
   {
     switch precision
     {
       case .ones:
-        return round(self)
+        return Darwin.round(self)
       case .tenths:
-        return round(self * 10) / 10.0
+        return Darwin.round(self * 10) / 10.0
       case .hundredths:
-        return round(self * 100) / 100.0
+        return Darwin.round(self * 100) / 100.0
     }
   }
 }

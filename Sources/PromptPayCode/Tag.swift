@@ -46,7 +46,9 @@ public extension Tag
     case transactionCurrency
     case transactionAmount
     case countryCode
-    
+    case postalCode
+    case additionalData
+    case crc
     
     var code: String
     {
@@ -62,7 +64,10 @@ public extension Tag
                                    .poiMethod : "01",
                                    .transactionCurrency : "53",
                                    .transactionAmount : "54",
-                                   .countryCode : "58"]
+                                   .countryCode : "58",
+                                   .postalCode : "61",
+                                   .additionalData : "62",
+                                   .crc : "63"]
       
       return lookup[self]!
     }
