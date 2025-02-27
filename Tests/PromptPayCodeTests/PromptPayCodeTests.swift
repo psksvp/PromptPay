@@ -60,3 +60,9 @@ func crx16TableTest() async throws
   
   #expect(PromptPayCode.crc16Table == crcTable)
 }
+
+@Test
+func testBillPayment() async throws
+{
+  //BillPayment(billerID: <#T##any TransactionUserID#>, amount: <#T##Double?#>)
+}

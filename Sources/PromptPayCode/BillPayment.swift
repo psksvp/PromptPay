@@ -64,11 +64,12 @@ public extension BillPayment
     let crc =
     {
       let crcTagID = "00\(Tag.ID.crc.code)".suffix(2)
-      let checksum = 
+      let checksum = String(format: "%04X", payloadSeq.map{$0.encoding}.joined().crc16).uppercased()
+      return "\(crcTagID)04\(checksum)"
     }
 
     
-    return payloadSeq.map{$0.encoding}.joined()
+    return "\(payloadSeq.map{$0.encoding}.joined())\(crc())"
   }
 }
 

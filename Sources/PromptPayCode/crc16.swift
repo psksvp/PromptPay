@@ -49,4 +49,12 @@ public extension Sequence where Element == UInt8
   }
 }
 
+public extension String
+{
+  var crc16: UInt16
+  {
+    Array(self.utf8).crc16
+  }
+}
+
 
