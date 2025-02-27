@@ -39,9 +39,15 @@ public extension BillPayment
 {  
   var encoding: String
   {
+    let ref2Seq =
+    {
+      guard let ref = self.ref2 else {return Array<Tag>()}
+      return [Tag(id: .ref2, value: ref)]
+    }
+    
     let paymentSeq = [Tag(id: .aid, value: self.aid),
                       Tag(id: .billerID, value: billerID.value),
-                      Tag(id: .ref1, value: self.ref1 ?? "")] + (ref2 != nil ? [Tag(id: .ref2, value: ref2!)] : [])
+                      Tag(id: .ref1, value: self.ref1 ?? "")] + ref2Seq()
       
     let amountSeq =
     {

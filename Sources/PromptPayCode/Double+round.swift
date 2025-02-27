@@ -9,28 +9,23 @@ import Foundation
 
 public extension Double
 {
-  func round(decimalPoints: UInt) -> Double
+  enum RoundingPrecision
   {
-    let d = 10 * Int(decimalPoints)
-    return Darwin.round(self * d) / d
+    case ones
+    case tenths
+    case hundredths
   }
-//  enum RoundingPrecision
-//  {
-//    case ones
-//    case tenths
-//    case hundredths
-//  }
-//  
-//  func round(precision: RoundingPrecision = .hundredths) -> Double
-//  {
-//    switch precision
-//    {
-//      case .ones:
-//        return Darwin.round(self)
-//      case .tenths:
-//        return Darwin.round(self * 10) / 10.0
-//      case .hundredths:
-//        return Darwin.round(self * 100) / 100.0
-//    }
-//  }
+  
+  func round(precision: RoundingPrecision = .hundredths) -> Double
+  {
+    switch precision
+    {
+      case .ones:
+        return Darwin.round(self)
+      case .tenths:
+        return Darwin.round(self * 10) / 10.0
+      case .hundredths:
+        return Darwin.round(self * 100) / 100.0
+    }
+  }
 }
