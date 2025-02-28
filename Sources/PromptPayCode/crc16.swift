@@ -50,24 +50,19 @@ public extension Sequence where Element == UInt8
 {
   var crc16: UInt16
   {
-    self.reduce(UInt16(0xffff))
+    var crc: UInt16 = 0xffff
+        
+    for byte in self
     {
-      remainder, byte in
-      let bigEndianInput = UInt16(byte) << 8
-      let index = (bigEndianInput ^ remainder) >> 8
-      return crc16Table[Int(index)] ^ (remainder << 8)
-    }
-  }
-  
-  func crc16(_ crc: UInt16 = 0) -> UInt16
-  {
-    self.reduce(crc)
-    {
-      remainder, byte in
-      let bigEndianInput = UInt16(byte) << 8
-      let index = (bigEndianInput ^ remainder) >> 8
-      return crc16Table[Int(index)] ^ (remainder << 8)
-    }
+      crc ^= UInt16(byte) << 8
+      
+      for _ in 0..<8
+      {
+        crc = crc & 0x8000 != 0 ? crc << 1 ^ 0x1021 : crc << 1
+      }
+     }
+        
+     return (crc ^ 0) & 0xffff
   }
 }
 
@@ -80,3 +75,10 @@ public extension String
 }
 
 
+//    self.reduce(UInt16(0xffff))
+//    {
+//      remainder, byte in
+//      let bigEndianInput = UInt16(byte) << 8
+//      let index = (bigEndianInput ^ remainder) >> 8
+//      return crc16Table[Int(index)] ^ (remainder << 8)
+//    }

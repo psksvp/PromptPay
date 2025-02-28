@@ -4,7 +4,7 @@
 import PackageDescription
 
 let package = Package( name: "PromptPayCode",
-                  platforms: [.macOS(.v13), .iOS(.v15)],
+                  platforms: [.macOS(.v13), .iOS(.v16)],
                    products: [.library(name: "PromptPayCode",
                                        targets: ["PromptPayCode"])],
                     targets: [.target(name: "PromptPayCode"),
