@@ -60,11 +60,11 @@ public extension BillPayment
                       Tag(id: .payment, value: paymentSeq.map{$0.encoding}.joined()),
                       Tag(id: .transactionCurrency, value: Tag.Value.currencyTHB),
                       Tag(id: .countryCode, value: "TH")] +
-                      self.encode(amount: self.amount) +
+                      self.tag(amount: self.amount) +
                       ref3Seq()
     
     let payload = payloadSeq.map{$0.encoding}.joined()
-    let crc = self.crc(payload: payload)
+    let crc = self.crc(payload: payload).encoding
     return "\(payload)\(crc)"
   }
 }

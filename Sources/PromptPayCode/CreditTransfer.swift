@@ -7,10 +7,10 @@
 
 public struct CreditTransfer: Transaction
 {
-  let target: TransactionUserID
+  let target: Proxy
   let amount: Double?
   
-  public init(target: TransactionUserID, amount: Double?)
+  public init(target: Proxy, amount: Double?)
   {
     self.target = target
     self.amount = amount
@@ -21,12 +21,6 @@ public extension CreditTransfer
 {
   var encoding: String
   {
-    let amountSeq =
-    {
-      guard let amt = self.amount else {return Array<Tag>()}
-      return [Tag(id: .transactionAmount, value: "\(amt.round(precision: .hundredths))")]
-    }
-    
     let targetSeq = [Tag(id: .payloadFormat, value: Tag.Value.merchantPresented),
                      Tag(code: target.code, value: target.value)]
     
@@ -35,10 +29,12 @@ public extension CreditTransfer
                       Tag(id: .creditTransfer, value: targetSeq.map{$0.encoding}.joined()),
                       Tag(id: .transactionCurrency, value: Tag.Value.currencyTHB),
                       Tag(id: .countryCode, value: "TH")] +
-                      self.encode(amount: self.amount)
+                      self.tag(amount: self.amount)
     
     
 
-    return ""
+    let payload = payloadSeq.map{$0.encoding}.joined()
+    let crc = self.crc(payload: payload).encoding
+    return "\(payload)\(crc)"
   }
 }

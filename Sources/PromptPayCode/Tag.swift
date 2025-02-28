@@ -97,7 +97,7 @@ public extension Tag
     let len = "00\(self.length)".suffix(2)
     // encode subtags if there is
     let subTagsEncoding = self.subTags?.map{$0.encoding}
-                                       .joined(separator: "") ?? ""
+                                       .joined() ?? ""
     return "\(self.id)\(len)\(subTagsEncoding)\(self.value)"
   }
 }

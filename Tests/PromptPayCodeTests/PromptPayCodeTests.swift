@@ -61,8 +61,18 @@ func crx16TableTest() async throws
   #expect(PromptPayCode.crc16Table == crcTable)
 }
 
+//@Test
+//func testBillPayment() async throws
+//{
+//  print(BillPayment(billerID: .nationalID("12322"), amount: 23.34).encoding)
+//}
+
 @Test
-func testBillPayment() async throws
+func testCreditTransfer() async throws
 {
-  print(BillPayment(billerID: .nationalID("12322"), amount: 23.34).encoding)
+  let generated = CreditTransfer(target: .phone("0812223333"), amount: nil).encoding
+  print(generated)
+  let expected = "00020101021129370016A0000006770101110113006681222333353037645802TH63041DCF"
+  print(expected)
+  #expect(generated == expected)
 }

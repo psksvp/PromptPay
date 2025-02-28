@@ -18,8 +18,11 @@ extension Transaction
     return Tag(id: .crc, value: checksum)
   }
   
-  func amount(_ amt: Double) -> Tag
+  func tag(amount: Double?) -> [Tag]
   {
-    Tag(id: .transactionAmount, value: "\(amt.round(precision: .hundredths))")
+    guard let amt = amount else {return Array<Tag>()}
+    return [Tag(id: .transactionAmount, value: "\(amt.round(precision: .hundredths))")]
   }
 }
+
+

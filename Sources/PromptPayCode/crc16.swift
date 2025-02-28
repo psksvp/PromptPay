@@ -35,11 +35,33 @@ let crc16Table = (UInt8(0) ... UInt8(255)).map
                     byte.crc16(polynomial: 0x1021)
                   }
 
+/**
+ export function crc16xmodem(data: string, crc = 0x0) {
+   for (const i of data) {
+     const b = i.charCodeAt(0)
+     const n = (b ^ (crc >> 8)) & 0xff
+     crc = TABLE[n] ^ (crc << 8)
+   }
+   return (crc ^ 0) & 0xffff
+ }
+ */
+
 public extension Sequence where Element == UInt8
 {
   var crc16: UInt16
   {
-    self.reduce(UInt16(0))
+    self.reduce(UInt16(0xffff))
+    {
+      remainder, byte in
+      let bigEndianInput = UInt16(byte) << 8
+      let index = (bigEndianInput ^ remainder) >> 8
+      return crc16Table[Int(index)] ^ (remainder << 8)
+    }
+  }
+  
+  func crc16(_ crc: UInt16 = 0) -> UInt16
+  {
+    self.reduce(crc)
     {
       remainder, byte in
       let bigEndianInput = UInt16(byte) << 8
