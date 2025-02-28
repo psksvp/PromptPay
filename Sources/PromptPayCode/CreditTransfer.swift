@@ -5,7 +5,7 @@
 //  Created by psksvp on 28/2/2025.
 //
 
-public struct CreditTransfer
+public struct CreditTransfer: Transaction
 {
   let target: TransactionUserID
   let amount: Double?
@@ -34,15 +34,11 @@ public extension CreditTransfer
                       Tag(id: .poiMethod, value: self.amount != nil ? Tag.Value.poiDynamic : Tag.Value.poiStatic),
                       Tag(id: .creditTransfer, value: targetSeq.map{$0.encoding}.joined()),
                       Tag(id: .transactionCurrency, value: Tag.Value.currencyTHB),
-                      Tag(id: .countryCode, value: "TH")] + amountSeq()
+                      Tag(id: .countryCode, value: "TH")] +
+                      self.encode(amount: self.amount)
     
-    let crc =
-    {
-      let crcTagID = "00\(Tag.ID.crc.code)".suffix(2)
-      let checksum = String(format: "%04X", payloadSeq.map{$0.encoding}.joined().crc16).uppercased()
-      return "\(crcTagID)04\(checksum)"
-    }
     
+
     return ""
   }
 }
