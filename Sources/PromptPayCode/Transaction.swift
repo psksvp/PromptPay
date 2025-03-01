@@ -21,7 +21,8 @@ extension Transaction
   func tag(amount: Double?) -> [Tag]
   {
     guard let amt = amount else {return Array<Tag>()}
-    return [Tag(id: .transactionAmount, value: "\(amt.round(precision: .hundredths))")]
+    let fAMT = String(format: "%.2f", amt.round(precision: .hundredths))
+    return [Tag(id: .transactionAmount, value: "\(fAMT)")]
   }
 }
 

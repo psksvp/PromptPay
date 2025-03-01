@@ -7,6 +7,8 @@ let package = Package( name: "PromptPayCode",
                   platforms: [.macOS(.v13), .iOS(.v16)],
                    products: [.library(name: "PromptPayCode",
                                        targets: ["PromptPayCode"])],
-                    targets: [.target(name: "PromptPayCode"),
+               dependencies: [.package(url: "https://github.com/ivanesik/CrcSwift.git", branch: "master")],
+                    targets: [.target(name: "PromptPayCode", dependencies: ["CrcSwift"]),
                               .testTarget(name: "PromptPayCodeTests",
                                   dependencies: ["PromptPayCode"])])
+
