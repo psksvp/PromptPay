@@ -4,8 +4,13 @@ import Testing
 @Test
 func crc16StringTest() async throws
 {
-  let crc = "00020101021129370016A0000006770101110113006681222333353037645802TH6304".crc16
-  #expect(String(format: "%04X", crc).uppercased() == "1DCF")
+  let crc = "00020101021129370016A0000006770101110113006681222333353037645802TH6304".crc16.hex
+  #expect(crc.uppercased() == "1DCF")
+  #expect("hello".crc16.hex.uppercased() == "D26E")
+  #expect("hello1234".crc16.hex.uppercased() == "1288")
+  #expect("dog".crc16.hex.uppercased() == "8C62")
+  #expect("cat".crc16.hex.uppercased() == "08AF")
+  #expect("abcdefghijklmnopqrstuvwxyz0123456789".crc16.hex.uppercased() == "4AEB")
 }
 
 

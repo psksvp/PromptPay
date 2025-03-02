@@ -25,3 +25,11 @@ public extension String
   }
 }
 
+public extension UInt16
+{
+  var hex: String
+  {
+    String(format: "%04X", self)
+  }
+}
+
