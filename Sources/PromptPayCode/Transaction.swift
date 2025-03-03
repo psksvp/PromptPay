@@ -16,7 +16,7 @@ extension Transaction
   {
     //63 is crc tag id, 04 is the len in char of checksum length.
     let crcTagString = "6304"
-    let checksum = String(format: "%04X", "\(payload)\(crcTagString)".crc16).uppercased()
+    let checksum = "\(payload)\(crcTagString)".crc16.hex.uppercased()
     return Tag(id: .crc, value: checksum)
   }
   
