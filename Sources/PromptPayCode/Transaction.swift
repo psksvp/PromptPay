@@ -15,8 +15,10 @@ extension Transaction
   func crc(payload: String) -> Tag
   {
     //63 is crc tag id, 04 is the len in char of checksum length.
+    //have to do it this way becase the tag ig and len of cksum
+    //need to be in for computing cksum
     let crcTagString = "6304"
-    let checksum = String(format: "%04X", "\(payload)\(crcTagString)".crc16).uppercased()
+    let checksum = "\(payload)\(crcTagString)".crc16.hex.uppercased()
     return Tag(id: .crc, value: checksum)
   }
   

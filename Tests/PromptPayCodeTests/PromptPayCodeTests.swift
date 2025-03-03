@@ -14,11 +14,18 @@ func crc16StringTest() async throws
 }
 
 
-//@Test
-//func testBillPayment() async throws
-//{
-//  print(BillPayment(billerID: .nationalID("12322"), amount: 23.34).encoding)
-//}
+@Test
+func testBillPayment() async throws
+{
+  let generated = BillPayment(billerID: "0112233445566",
+                              amount: nil,
+                              ref1: "CUSTOMER001",
+                              ref2: "INV001",
+                              ref3: "SCB").encoding
+  let expected = "00020101021130620016A000000677010112011301122334455660211CUSTOMER0010306INV00153037645802TH62070703SCB6304780E"
+  
+  #expect(generated == expected)
+}
 
 @Test
 func testCreditTransferNoAmount() async throws
