@@ -1,5 +1,5 @@
 //
-//  PromptPayCode.swift
+//  PromptPay.swift
 //
 //  Created by psksvp on 21/2/2025.
 //

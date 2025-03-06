@@ -1,5 +1,5 @@
 import Testing
-@testable import PromptPayCode
+@testable import PromptPay
 
 @Test
 func crc16StringTest() async throws
