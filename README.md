@@ -31,6 +31,13 @@ let code = CreditTransfer(target: .phone("0812223333"),
 
 The return value of from `Transaction.encoding` is a `String` containing the encoding. To generate QR-code, pass the encoding string to any QR code generator. I use this one https://github.com/dagronf/QRCode
 
+## Swift PM
+
+```swift
+dependencies: [.package(url: "https://github.com/psksvp/PromptPay.git", 
+                        branch: "main")]
+```
+
 ## Caution
 
 The code has not been extensively tested. I tested it just enough for what I need. 
