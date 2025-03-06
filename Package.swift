@@ -3,12 +3,13 @@
 
 import PackageDescription
 
-let package = Package( name: "PromptPayCode",
+let package = Package( name: "PromptPay",
                   platforms: [.macOS(.v13), .iOS(.v16)],
-                   products: [.library(name: "PromptPayCode",
-                                       targets: ["PromptPayCode"])],
-               dependencies: [.package(url: "https://github.com/ivanesik/CrcSwift.git", branch: "master")],
-                    targets: [.target(name: "PromptPayCode", dependencies: ["CrcSwift"]),
-                              .testTarget(name: "PromptPayCodeTests",
-                                  dependencies: ["PromptPayCode"])])
+                   products: [.library(name: "PromptPay",
+                                       targets: ["PromptPay"])],
+               dependencies: [.package(url: "https://github.com/ivanesik/CrcSwift.git",
+                                       branch: "master")],
+                    targets: [.target(name: "PromptPay", dependencies: ["CrcSwift"]),
+                              .testTarget(name: "PromptPayTests",
+                                  dependencies: ["PromptPay"])])
 
