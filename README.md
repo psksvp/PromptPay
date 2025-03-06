@@ -1,7 +1,7 @@
-# Thailand PromptPay code generator in Swift
+# PromptPay code generator in Swift
 
 
-~~~swift 
+```swift 
 
 let code = BillPayment(billerID: "0112233445566",
                        amount: nil,
@@ -9,4 +9,4 @@ let code = BillPayment(billerID: "0112233445566",
                        ref2: "INV001",
                        ref3: "SCB").encoding
 
-~~~ 
+```
